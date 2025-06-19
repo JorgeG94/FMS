@@ -97,124 +97,77 @@ endif ()
 if (FPIC)
   set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 endif ()
-
-# Collect FMS Fortran source files
-list(APPEND fms_fortran_src_files
-  affinity/fms_affinity.F90
-  amip_interp/amip_interp.F90
-  astronomy/astronomy.F90
-  axis_utils/axis_utils2.F90
-  block_control/block_control.F90
-  column_diagnostics/column_diagnostics.F90
-  constants/constants.F90
-  constants/fmsconstants.F90
-  constants4/constantsr4.F90
-  constants4/fmsconstantsr4.F90
-  coupler/atmos_ocean_fluxes.F90
-  coupler/gex.F90
-  coupler/coupler_types.F90
-  coupler/ensemble_manager.F90
-  data_override/get_grid_version.F90
-  data_override/data_override.F90
-  diag_integral/diag_integral.F90
-  diag_manager/diag_axis.F90
-  diag_manager/diag_data.F90
-  diag_manager/diag_grid.F90
-  diag_manager/diag_manager.F90
-  diag_manager/diag_output.F90
-  diag_manager/diag_table.F90
-  diag_manager/diag_util.F90
-  diag_manager/fms_diag_time_utils.F90
-  diag_manager/fms_diag_object.F90
-  diag_manager/fms_diag_yaml.F90
-  diag_manager/fms_diag_file_object.F90
-  diag_manager/fms_diag_field_object.F90
-  diag_manager/fms_diag_axis_object.F90
-  diag_manager/fms_diag_output_buffer.F90
-  diag_manager/fms_diag_input_buffer.F90
-  diag_manager/fms_diag_time_reduction.F90
-  diag_manager/fms_diag_outfield.F90
-  diag_manager/fms_diag_elem_weight_procs.F90
-  diag_manager/fms_diag_fieldbuff_update.F90
-  diag_manager/fms_diag_bbox.F90
-  diag_manager/fms_diag_reduction_methods.F90
-  drifters/cloud_interpolator.F90
-  drifters/drifters.F90
-  drifters/drifters_comm.F90
-  drifters/drifters_core.F90
-  drifters/drifters_input.F90
-  drifters/drifters_io.F90
-  drifters/quicksort.F90
-  exchange/stock_constants.F90
-  exchange/xgrid.F90
-  field_manager/field_manager.F90
-  field_manager/fm_util.F90
-  field_manager/fm_yaml.F90
-  fms/fms.F90
-  fms2_io/blackboxio.F90
-  fms2_io/fms_io_utils.F90
-  fms2_io/fms_netcdf_domain_io.F90
-  fms2_io/fms_netcdf_unstructured_domain_io.F90
-  fms2_io/fms2_io.F90
-  fms2_io/netcdf_io.F90
-  horiz_interp/horiz_interp_bicubic.F90
-  horiz_interp/horiz_interp_bilinear.F90
-  horiz_interp/horiz_interp_conserve.F90
-  horiz_interp/horiz_interp_spherical.F90
-  horiz_interp/horiz_interp_type.F90
-  horiz_interp/horiz_interp.F90
-  interpolator/interpolator.F90
-  memutils/memutils.F90
-  monin_obukhov/monin_obukhov_inter.F90
-  monin_obukhov/monin_obukhov.F90
-  grid_utils/gradient.F90
-  mosaic2/grid2.F90
-  mosaic2/mosaic2.F90
-  mpp/mpp.F90
-  mpp/mpp_data.F90
-  mpp/mpp_domains.F90
-  mpp/mpp_efp.F90
-  mpp/mpp_memutils.F90
-  mpp/mpp_parameter.F90
-  mpp/mpp_utilities.F90
-  parser/yaml_parser.F90
-  parser/fms_yaml_output.F90
-  platform/platform.F90
-  random_numbers/mersennetwister.F90
-  random_numbers/random_numbers.F90
-  sat_vapor_pres/sat_vapor_pres_k.F90
-  sat_vapor_pres/sat_vapor_pres.F90
-  string_utils/fms_string_utils.F90
-  time_interp/time_interp_external2.F90
-  time_interp/time_interp.F90
-  time_manager/get_cal_time.F90
-  time_manager/time_manager.F90
-  topography/gaussian_topog.F90
-  topography/topography.F90
-  tracer_manager/tracer_manager.F90
-  tridiagonal/tridiagonal.F90
-  libFMS.F90
-)
-
-# Collect FMS C source files
-list(APPEND fms_c_src_files
-  affinity/affinity.c
-  fms/fms_stacksize.c
-  grid_utils/gradient_c2l.c
-  grid_utils/grid_utils.c
-  grid_utils/tree_utils.c
-  horiz_interp/include/horiz_interp_conserve_xgrid.c
-  mpp/mpp_memuse.c
-  parser/yaml_parser_binding.c
-  parser/yaml_output_functions.c
-  string_utils/fms_string_utils_binding.c
-)
+set(fms_fortran_src_files libFMS.F90)
+set(fms_c_src_files "")
+add_subdirectory(affinity)
+add_subdirectory(amip_interp)
+add_subdirectory(astronomy)
+add_subdirectory(axis_utils)
+add_subdirectory(block_control)
+add_subdirectory(column_diagnostics)
+add_subdirectory(constants)
+add_subdirectory(constants4)
+add_subdirectory(coupler)
+add_subdirectory(data_override)
+add_subdirectory(diag_integral)
+add_subdirectory(diag_manager)
+add_subdirectory(drifters)
+add_subdirectory(exchange)
+add_subdirectory(field_manager)
+add_subdirectory(fms)
+add_subdirectory(fms2_io)
+add_subdirectory(horiz_interp)
+add_subdirectory(interpolator)
+add_subdirectory(memutils)
+add_subdirectory(monin_obukhov)
+add_subdirectory(grid_utils)
+add_subdirectory(mosaic2)
+add_subdirectory(mpp)
+add_subdirectory(parser)
+add_subdirectory(platform)
+add_subdirectory(random_numbers)
+add_subdirectory(sat_vapor_pres)
+add_subdirectory(string_utils)
+add_subdirectory(time_interp)
+add_subdirectory(time_manager)
+add_subdirectory(topography)
+add_subdirectory(tracer_manager)
+add_subdirectory(tridiagonal)
 
 # Collect FMS header files
 list(APPEND fms_header_files
   include/file_version.h
   include/fms_platform.h
 )
+set(fms_include_directories 
+  include
+  fms
+  fms/include
+  fms2_io/include
+  string_utils/include
+  mpp/include
+  column_diagnostics/include
+  monin_obukhov/include
+  sat_vapor_pres/include
+  horiz_interp/include
+  diag_integral/include
+  random_numbers/include
+  diag_manager/include
+  constants4
+  topography/include
+  axis_utils/include
+  mosaic2/include
+  constants
+  astronomy/include
+  field_manager/include
+  time_interp/include
+  tracer_manager/include
+  tridiagonal/include
+  interpolator/include
+  coupler/include
+  data_override/include
+  amip_interp/include
+  )
 
 # Standard FMS compiler definitions
 list(APPEND fms_defs
@@ -313,33 +266,7 @@ foreach(kind ${kinds})
   # Fortran
   add_library(${libTgt}_f OBJECT ${fms_fortran_src_files})
 
-  target_include_directories(${libTgt}_f PRIVATE include
-                                                 fms
-                                                 fms/include
-                                                 fms2_io/include
-                                                 string_utils/include
-                                                 mpp/include
-                                                 column_diagnostics/include
-                                                 monin_obukhov/include
-                                                 sat_vapor_pres/include
-                                                 horiz_interp/include
-                                                 diag_integral/include
-                                                 random_numbers/include
-                                                 diag_manager/include
-                                                 constants4
-                                                 topography/include
-                                                 axis_utils/include
-                                                 mosaic2/include
-                                                 constants
-                                                 astronomy/include
-                                                 field_manager/include
-                                                 time_interp/include
-                                                 tracer_manager/include
-                                                 tridiagonal/include
-                                                 interpolator/include
-                                                 coupler/include
-                                                 data_override/include
-                                                 amip_interp/include)
+  target_include_directories(${libTgt}_f PRIVATE ${fms_include_directories})
 
   target_compile_definitions(${libTgt}_f PRIVATE "${fms_defs}")
   target_compile_definitions(${libTgt}_f PRIVATE "${${kind}_defs}")
@@ -358,7 +285,7 @@ foreach(kind ${kinds})
 
   # Check if gnu 10 or higher
   # this should only be needed with mpich, but wasn't able to find a good way to find the MPI flavor consistently
-  if ( CMAKE_Fortran_COMPILER_VERSION MATCHES "1[0-9]\.[0-9]*\.[0-9]*" AND CMAKE_Fortran_COMPILER_ID MATCHES "GNU")
+  if ( CMAKE_Fortran_COMPILER_ID MATCHES "GNU" AND CMAKE_Fortran_COMPILER_VERSION VERSION_GREATER 10.0)
     include(CheckFortranCompilerFlag)
     check_fortran_compiler_flag("-fallow-argument-mismatch" _arg_mismatch_flag)
     if(_arg_mismatch_flag)
