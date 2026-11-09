@@ -358,7 +358,9 @@ foreach(kind ${kinds})
                                                  data_override/include
                                                  amip_interp/include)
   target_compile_definitions(${libTgt}_f PRIVATE "${fms_defs}")
-  target_compile_definitions(${libTgt}_f PRIVATE "${${kind}_defs}")
+  if(${kind}_defs)
+    target_compile_definitions(${libTgt}_f PRIVATE "${${kind}_defs}")
+  endif()
   set_target_properties(${libTgt}_f PROPERTIES COMPILE_FLAGS "${${kind}_flags}")
   set_target_properties(${libTgt}_f PROPERTIES Fortran_MODULE_DIRECTORY
                                                ${moduleDir})
@@ -428,7 +430,9 @@ foreach(kind ${kinds})
     $<INSTALL_INTERFACE:${includeDir}>)
 
   target_compile_definitions(${libTgt} PRIVATE "${fms_defs}")
-  target_compile_definitions(${libTgt} PRIVATE "${${kind}_defs}")
+  if(${kind}_defs)
+    target_compile_definitions(${libTgt} PRIVATE "${${kind}_defs}")
+  endif()
 
   target_link_libraries(${libTgt} PUBLIC NetCDF::NetCDF_C
                                          NetCDF::NetCDF_Fortran
@@ -440,6 +444,11 @@ foreach(kind ${kinds})
 
   if(OpenMP_Fortran_FOUND)
     target_link_libraries(${libTgt} PRIVATE OpenMP::OpenMP_C OpenMP::OpenMP_Fortran)
+  endif()
+
+  # Propagate GPU link flags so consumers can extract device code from the static library
+  if(FMS_OMPOFFLOAD)
+    target_link_options(${libTgt} INTERFACE -mp=gpu -acc=gpu -gpu=mem:separate)
   endif()
 
   add_library(FMS::${libTgt} ALIAS ${libTgt})
@@ -506,7 +515,9 @@ if(NOT kinds)
                                                    data_override/include
                                                    amip_interp/include)
     target_compile_definitions(${libTgt}_f PRIVATE "${fms_defs}")
-    target_compile_definitions(${libTgt}_f PRIVATE "${${kind}_defs}")
+    if(${kind}_defs)
+      target_compile_definitions(${libTgt}_f PRIVATE "${${kind}_defs}")
+    endif()
     set_target_properties(${libTgt}_f PROPERTIES COMPILE_FLAGS ${${kind}_flags})
     set_target_properties(${libTgt}_f PROPERTIES Fortran_MODULE_DIRECTORY
                                                  ${moduleDir})
@@ -572,7 +583,9 @@ if(NOT kinds)
       $<INSTALL_INTERFACE:${includeDir}>)
 
     target_compile_definitions(${libTgt} PRIVATE "${fms_defs}")
-    target_compile_definitions(${libTgt} PRIVATE "${${kind}_defs}")
+    if(${kind}_defs)
+      target_compile_definitions(${libTgt} PRIVATE "${${kind}_defs}")
+    endif()
     set_target_properties(${libTgt}_f PROPERTIES COMPILE_FLAGS ${${kind}_flags})
 
     target_link_libraries(${libTgt} PUBLIC NetCDF::NetCDF_C
@@ -585,6 +598,11 @@ if(NOT kinds)
 
     if(OpenMP_Fortran_FOUND)
       target_link_libraries(${libTgt} PRIVATE OpenMP::OpenMP_C OpenMP::OpenMP_Fortran)
+    endif()
+
+    # Propagate GPU link flags so consumers can extract device code from the static library
+    if(FMS_OMPOFFLOAD)
+      target_link_options(${libTgt} INTERFACE -mp=gpu -acc=gpu -gpu=mem:separate)
     endif()
 
     add_library(FMS::${libTgt} ALIAS ${libTgt})

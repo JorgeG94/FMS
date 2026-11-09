@@ -6,7 +6,7 @@ set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} ")
 
 # GPU offload flags, enabled via -DFMS_OMPOFFLOAD=ON
 if(FMS_OMPOFFLOAD)
-  set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -Mnovect -Mnofma -mp=gpu -acc=gpu -gpu=mem:separate")
+  set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -Mnovect -Mnofma -stdpar=gpu -mp=gpu -acc=gpu -gpu=mem:separate")
 endif()
 
 set(CMAKE_Fortran_FLAGS_RELEASE "-O3")
